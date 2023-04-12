@@ -13,14 +13,16 @@ Follow Up Input: {question}
 Standalone question:`);
 
 const QA_PROMPT = PromptTemplate.fromTemplate(
-  `You are an AI assistant for a Barrister in court trials. You are given the following extracted parts of a long document and a question. Your job is to analyse the information and determine if there are material differences in the statements made by the plaintiffs, defendents and or witnesses. You may receive other questions that you should answer to the best of your knowledge.
+  `You are an AI assistant providing helpful advice. You are given the following extracted parts of a long document and a question. Provide a conversational answer based on the context provided.
 You should only provide hyperlinks that reference the context below. Do NOT make up hyperlinks.
+If you can't find the answer in the context below, just say "Hmm, I'm not sure." Don't try to make up an answer.
+If the question is not related to the context, politely respond that you are tuned to only answer questions that are related to the context.
 
 Question: {question}
 =========
 {context}
 =========
-`,
+Answer in Markdown:`,
 );
 
 export const makeChain = (
@@ -34,7 +36,7 @@ export const makeChain = (
   const docChain = loadQAChain(
     new OpenAIChat({
       temperature: 0.5,
-      modelName: 'gpt-3.5-turbo', //change this to older versions (e.g. gpt-3.5-turbo) if you don't have access to gpt-4
+      modelName: 'gpt-4', //change this to older versions (e.g. gpt-3.5-turbo) if you don't have access to gpt-4
       streaming: Boolean(onTokenStream),
       callbackManager: onTokenStream
         ? CallbackManager.fromHandlers({
