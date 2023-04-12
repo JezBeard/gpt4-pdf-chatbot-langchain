@@ -179,6 +179,20 @@
   font-size: inherit;
 }
 
+.markdownanswer table {
+  border-collapse: collapse;
+}
+
+.markdownanswer th,
+.markdownanswer td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.markdownanswer tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
 .center {
   display: flex;
   justify-content: center;

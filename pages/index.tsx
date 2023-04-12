@@ -5,6 +5,7 @@ import { Message } from '@/types/chat';
 import { fetchEventSource } from '@microsoft/fetch-event-source';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from "remark-gfm";
 import LoadingDots from '@/components/ui/LoadingDots';
 import { Document } from 'langchain/document';
 import {
@@ -207,7 +208,7 @@ export default function Home() {
                       <div key={`chatMessage-${index}`} className={className}>
                         {icon}
                         <div className={styles.markdownanswer}>
-                          <ReactMarkdown linkTarget="_blank">
+                          <ReactMarkdown remarkPlugins={[remarkGfm]} linkTarget="_blank">
                             {message.message}
                           </ReactMarkdown>
                         </div>
